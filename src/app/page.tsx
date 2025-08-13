@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { BRAND } from '@/lib/brand'
 import { cn } from '@/lib/utils'
 import ParticleBackground from '@/components/ParticleBackground'
+import WaitlistOptimizer from '@/components/WaitlistOptimizer'
 import { 
   ChevronDown, 
   Brain, 
@@ -119,15 +120,15 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.8 }}
             >
-              <motion.a
-                href={`mailto:${BRAND.contact.waitlistEmail}?subject=Join the Waitlist`}
-                className="bg-electric-blue hover:bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all inline-flex items-center justify-center gap-2 group"
+              <motion.button
+                onClick={() => scrollToSection('waitlist')}
+                className="bg-electric-blue hover:bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all inline-flex items-center justify-center gap-2 group cursor-pointer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 Join the waitlist
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </motion.a>
+              </motion.button>
               <motion.button
                 onClick={() => scrollToSection('promise')}
                 className="border-2 border-zinc-700 hover:border-zinc-600 text-zinc-300 hover:text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all"
@@ -412,42 +413,27 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Strip */}
-      <section className="py-24 relative overflow-hidden">
+      {/* Waitlist Section */}
+      <section className="py-24 relative overflow-hidden" id="waitlist">
         <div className="absolute inset-0 bg-gradient-to-r from-electric-blue/10 via-cyan-pulse/10 to-electric-blue/10 animate-gradient bg-[length:200%_200%]" />
         
-        <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-          <motion.h2 
-            className="text-4xl md:text-5xl font-bold mb-6"
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            {BRAND.taglines.tertiary}
-          </motion.h2>
-          <motion.p 
-            className="text-zinc-400 mb-10 text-lg max-w-xl mx-auto"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-          >
-            Join the waitlist to be among the first to experience the future of personal growth.
-          </motion.p>
-          <motion.a
-            href={`mailto:${BRAND.contact.waitlistEmail}?subject=Join the Waitlist`}
-            className="bg-electric-blue hover:bg-blue-600 text-white px-10 py-4 rounded-lg font-semibold text-lg transition-all inline-flex items-center gap-2 group shadow-xl shadow-electric-blue/20"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+        <div className="max-w-4xl mx-auto px-6 relative z-10">
+          <motion.div
+            className="text-center mb-16"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.4, duration: 0.6 }}
+            transition={{ duration: 0.6 }}
           >
-            Get early access
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </motion.a>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              {BRAND.taglines.tertiary}
+            </h2>
+            <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
+              Join the waitlist to be among the first to experience AI coaching that tracks real progress, not just activity.
+            </p>
+          </motion.div>
+
+          <WaitlistOptimizer />
         </div>
       </section>
 
